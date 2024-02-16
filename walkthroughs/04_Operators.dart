@@ -111,7 +111,13 @@ main() {
   print(!(a>b));
 
   // '||' = Logical OR
+  print("\n|| - Logical OR");
+  print("a>b || a<b");
+  print(a>b || a<b);
 
-  // && Logical &&
-
+  // '&&' - Logical AND
+  print("\n&& - Logical AND");
+  print("a>b && a<b");
+  print(a>b && a<b);
+  
 }
