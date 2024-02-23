@@ -23,18 +23,18 @@ Methods
  */
 
 class Person {
-  String? firstName;
-  String? lastName;
-  String getFullName() => "$firstName $lastName";
+  String? firstName;                                      // nullable field
+  String? lastName;       
+  String getFullName() => "$firstName $lastName";         // method
 }
 
 main() {
-  Person somePerson = new Person(); 
+  Person somePerson = new Person();                       // instantiation
   // Person somePerson = Person(); // valid as well
 
   somePerson.firstName = "Clark";
   somePerson.lastName = "Kent";
-  print(somePerson.getFullName());
+  print(somePerson.getFullName());                        // prints Clark Kent
 }
 
 /*
