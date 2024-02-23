@@ -32,8 +32,6 @@ main() {
   Person somePerson = new Person(); 
   // Person somePerson = Person(); // valid as well
 
-
-
   somePerson.firstName = "Clark";
   somePerson.lastName = "Kent";
   print(somePerson.getFullName());
@@ -45,4 +43,6 @@ Given this code above, here are some things to take note of:
 
 - Instantiating a class does not require the new keyword
 
+- The fields firstName and lastName have a default accessor that is
+defined by default in every field in the class.
  */
