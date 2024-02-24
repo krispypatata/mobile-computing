@@ -3,7 +3,7 @@
   Student No.: 2020-03670
   Lab Section: CMSC 23 - UV 5L
 
-  Laboratory Exercise #01 : Dart Syntax
+  Laboratory Exercise #02 : OOP in Dart
   Date created: February 24, 2024
 
   Program Description:
