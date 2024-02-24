@@ -63,7 +63,7 @@ abstract class Commuter {
         
         // updating important variables
         this.walletBalance -= fareAmount;
-        this.travelLog = [vehicle.vehicleID, destination];
+        this.travelLog.add([vehicle.vehicleID, destination]);
         vehicle.passengers.add(this);
       } else {
         print("Passenger ${this.commuterID} does not have enough fare to ride ${vehicle.vehicleID}!");
@@ -113,4 +113,3 @@ class SeniorPwd extends Commuter {
   // constructor
   SeniorPwd(int walletBalance) : super (walletBalance, SeniorPwd.TYPE, SeniorPwd.numOfSeniorPwds++, "");
 }
-

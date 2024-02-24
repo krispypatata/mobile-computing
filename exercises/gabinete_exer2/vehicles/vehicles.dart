@@ -25,13 +25,13 @@ abstract class Vehicle {
   static int numberOfVehicles = 0;
 
   // field(s)/attribute(s)
-  String type;
-  int number;
-  int capacity;
-  String vehicleID;
+  String _type;
+  int _number;
+  int _capacity;
+  String _vehicleID;
 
   // other class instances as attributes
-  List<Commuter> passengers = [];
+  List<Commuter> _passengers = [];
 
   // destination constants
   static const String TAFT = "Taft";
@@ -51,8 +51,8 @@ abstract class Vehicle {
 
   // ****************************************************************************************
   // constructor (only for descendats—since abstract classes can't be initialized)
-  Vehicle (this.capacity, this.type, this.number, this.vehicleID) {
-    this.vehicleID = "${this.type}${this.number}";
+  Vehicle (this._capacity, this._type, this._number, this._vehicleID) {
+    this._vehicleID = "${this._type}${this._number}";
     Vehicle.numberOfVehicles++;
   }
 
@@ -62,22 +62,38 @@ abstract class Vehicle {
     Prints information about the current passengers of a given vehicle.
    */
   void printPassengers() {
-    print("[${this.vehicleID}] - Max Capacity: ${this.capacity}");
+    print("[${this._vehicleID}] - Max Capacity: ${this._capacity}");
 
     // traversing through the list of commuters
-    for (Commuter passenger in passengers) {
-      print("[${passenger.commuterID}] Wallet balance: ${passenger.walletBalance}.0 | Travel Log: [${passenger.travelLog[0]} - ${passenger.travelLog[1]}]");
+    for (Commuter passenger in this._passengers) {
+      String printStatement = "";
+      printStatement += "[${passenger.commuterID}] Wallet balance: ${passenger.walletBalance}.0 | Travel Log: [";
+      
+      // printing each log in the passenger's travel log
+      int index = 0;
+      for (List log in passenger.travelLog) {
+        printStatement += "${log[0]} - ${log[1]}";
+
+        if (index != passenger.travelLog.length-1) {
+          printStatement += ", ";
+        }
+
+        index += 1;
+      }
+      printStatement += "]";
+
+      // printing the log
+      print(printStatement);
     }
 
-    print("=============");
-    
+    print("============="); 
   }
 
    /*
     Prints information about the fare amount in each given destination.
    */
   void printFareMatrix() {
-    print("***** ${this.type} Fare Matrix *****");
+    print("***** ${this._type} Fare Matrix *****");
 
     // traversing through the contents of the map
     for (var entry in this.fares.entries) {
@@ -88,6 +104,12 @@ abstract class Vehicle {
 
     print("***************************\n");
   }
+
+  // ****************************************************************************************
+  // getter(s)
+  String get vehicleID => _vehicleID;
+  int get capacity => _capacity;
+  List<Commuter> get passengers => _passengers;
 }
 
 
@@ -133,4 +155,3 @@ class Taxi extends Vehicle {
     this.fares[Vehicle.GUADALUPE] = 110;
   }
 }
-
