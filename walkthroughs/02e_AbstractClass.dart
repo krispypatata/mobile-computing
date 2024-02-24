@@ -30,14 +30,15 @@ class Dog extends Animal {
   int numOfDogs = 0;
 
   // constructor
-  Dog (String animalName) : super(animalName, 4) {
-    numOfDogs ++;
+  Dog(String animalName) : super(animalName, 4) {
+    numOfDogs++;
   }
 
   // implementation of the super class method "eat"
   void eat() {
     this.isHungry = false;
-    print("Dog: ${animalName} is now eating. The value of isHungry is ${isHungry}.");
+    print(
+        "Dog: ${animalName} is now eating. The value of isHungry is ${isHungry}.");
   }
 }
 
