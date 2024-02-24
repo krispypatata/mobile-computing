@@ -1,3 +1,18 @@
+/*
+  Name: Gabinete, Keith Ginoel S.
+  Student No.: 2020-03670
+  Lab Section: CMSC 23 - UV 5L
+
+  Laboratory Exercise #01 : Dart Syntax
+  Date created: February 24, 2024
+
+  Program Description:
+    This is a simple prototype system designed to assist commuters with 
+  inquiries regarding fare details, routes, and other relevant information 
+  within a transport terminal. 
+ */
+
+
 // Imports
 import 'vehicles/vehicles.dart';
 import 'commuters/commuters.dart';
@@ -74,6 +89,8 @@ main() {
 
   // Logging
   print('''
+
+
     [ LOG ]
     Number of Vehicles: ${Vehicle.numberOfVehicles}
     Number of Buses: ${Bus.numOfBuses}

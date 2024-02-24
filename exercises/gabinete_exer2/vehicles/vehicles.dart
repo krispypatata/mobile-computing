@@ -6,16 +6,21 @@
   Laboratory Exercise #01 : Dart Syntax
   Date created: February 24, 2024
 
-
   Program Description:
-    Given a list of integers, print the number of occurrences of each unique number. Then, print
-  another list containing the product of each unique number and its number of occurrences.
+    This is a simple prototype system designed to assist commuters with 
+  inquiries regarding fare details, routes, and other relevant information 
+  within a transport terminal. 
  */
 
-// parent class
+
+// import statement(s)
 import '../commuters/commuters.dart';
 
+
+// ==========================================================================================
+// a parent class
 abstract class Vehicle {
+  // ****************************************************************************************
   // class field/attribute
   static int numberOfVehicles = 0;
 
@@ -35,6 +40,7 @@ abstract class Vehicle {
   static const String BUENDIA = "Buendia";
   static const String GUADALUPE = "Guadalupe";
 
+  // dictionary/map for the vehicles' destinations and their fare amont
   final Map<String, int> fares = {
     Vehicle.TAFT: 0,
     Vehicle.MAGALLANES: 0,
@@ -43,17 +49,33 @@ abstract class Vehicle {
     Vehicle.GUADALUPE: 0,
   };
 
+  // ****************************************************************************************
   // constructor (only for descendats—since abstract classes can't be initialized)
   Vehicle (this.capacity, this.type, this.number, this.vehicleID) {
     this.vehicleID = "${this.type}${this.number}";
     Vehicle.numberOfVehicles++;
   }
 
+  // ****************************************************************************************
   // method(s)
+  /*
+    Prints information about the current passengers of a given vehicle.
+   */
   void printPassengers() {
     print("[${this.vehicleID}] - Max Capacity: ${this.capacity}");
+
+    // traversing through the list of commuters
+    for (Commuter passenger in passengers) {
+      print("[${passenger.commuterID}] Wallet balance: ${passenger.walletBalance}.0 | Travel Log: [${passenger.travelLog[0]} - ${passenger.travelLog[1]}]");
+    }
+
+    print("=============");
+    
   }
 
+   /*
+    Prints information about the fare amount in each given destination.
+   */
   void printFareMatrix() {
     print("***** ${this.type} Fare Matrix *****");
 
@@ -68,44 +90,47 @@ abstract class Vehicle {
   }
 }
 
-// bus entity
+
+// ==========================================================================================
+// Bus entity
 class Bus extends Vehicle {
+  // ****************************************************************************************
   // field(s) / attribute(s)
   static int numOfBuses = 0;
   static const String TYPE = "BUS";
 
+  // ****************************************************************************************
   // constructor
   Bus(int capacity) : super(capacity, Bus.TYPE, Bus.numOfBuses++, "") {
-    // assigning appropriate fares
+    // assigning appropriate fare values
     this.fares[Vehicle.TAFT] = 20;
     this.fares[Vehicle.MAGALLANES] = 30;
     this.fares[Vehicle.AYALA] = 40;
     this.fares[Vehicle.BUENDIA] = 50;
     this.fares[Vehicle.GUADALUPE] = 60;
   }
-
-  // method(s)
 }
 
 
-
+// ==========================================================================================
 // taxi entity
 class Taxi extends Vehicle {
+  // ****************************************************************************************
   // field(s) / attribute(s)
   static int numOfTaxis = 0;
 
   // constant(s)
   static const String TYPE = "TAXI";
 
+  // ****************************************************************************************
   // constructor
   Taxi(int capacity) : super(capacity, Taxi.TYPE, Taxi.numOfTaxis++, "") {
-    // assigning appropriate fares
+    // assigning appropriate fare values
     this.fares[Vehicle.TAFT] = 70;
     this.fares[Vehicle.MAGALLANES] = 80;
     this.fares[Vehicle.AYALA] = 90;
     this.fares[Vehicle.BUENDIA] = 100;
     this.fares[Vehicle.GUADALUPE] = 110;
   }
-
-  // method(s)
 }
+
