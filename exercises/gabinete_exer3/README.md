@@ -5,7 +5,7 @@
 
 **Developed For:** CMSC 23 - Mobile Computing (A Computer Science Course in University of the Philippines Los Baños)
 
-**Studen Number:** 2020-03670
+**Student Number:** 2020-03670  
 **Section:** UV-5L
 
 ## Program Description
