@@ -1,16 +1,14 @@
 # gabinete_exer3
 
-A new Flutter project.
+**Developed by:** Gabinete, Keith Ginoel S.  
+**Date Developed:** March 08, 2024  
 
-## Getting Started
+**Developed For:** CMSC 23 - Mobile Computing (A Computer Science Course in University of the Philippines Los Baños)
 
-This project is a starting point for a Flutter application.
+**Studen Number:** 2020-03670
+**Section:** UV-5L
 
-A few resources to get you started if this is your first Flutter project:
+## Program Description
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+    This is a straightforward Flutter application that aims to emulate the UI design of an Instagram profile, albeit in a simplified manner.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

@@ -7,7 +7,7 @@
   Date created: March 08, 2024
 
   Program Description:
-    This is a simple app in flutter that tries to recreate an Instragram Profile.
+    This is a straightforward Flutter application that aims to emulate the UI design of an Instagram profile, albeit in a simplified manner.
  */
 
 import 'package:flutter/material.dart';

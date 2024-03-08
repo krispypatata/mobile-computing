@@ -1,38 +1,50 @@
 import 'package:flutter/material.dart';
 
+// Define a custom constant color for indigo[100]
+const Color indigo100 = Color(0xFFC5CAE9);
+
 class MyHomePage extends StatefulWidget {
   final String title;
-  MyHomePage({super.key, required this.title});
+  const MyHomePage({super.key, required this.title});
   @override
+  // ignore: library_private_types_in_public_api
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   // track the number of images/posts in the grid
   int _imagesCounter = 0;
+  List<String> imagePaths = [
+    "assets/01.jpg",
+    "assets/02.jpg",
+    "assets/03.png",
+    "assets/04.jpg",
+    "assets/05.jpg",
+    "assets/06.jpg",
+    "assets/07.jpg",
+    "assets/08.jpg",
+    "assets/09.jpg",
+    "assets/10.jpg",
+    "assets/11.jpg",
+    "assets/12.jpg",
+    "assets/13.jpg",
+    "assets/14.jpg",
+    "assets/15.jpeg",
+  ];
+  @override
+  void initState() {
+    super.initState();
+    // Initialize _imagesCounter to the actual number of images
+    _imagesCounter = imagePaths.length;
+  }
 
   Widget myGrid(int imageCounter) {
-    List<String> imagePaths = [
-      "assets/01.jpg",
-      "assets/02.jpeg",
-      "assets/03.png",
-      "assets/04.jpg",
-      "assets/05.jpg",
-      "assets/06.jpg",
-      "assets/07.jpg",
-      "assets/08.jpg",
-      "assets/09.jpg",
-      "assets/10.jpg",
-      "assets/11.jpg",
-      "assets/12.jpg",
-    ];
-
     // update the value of the imageCounter (both in the code and in the UI)
-    _imagesCounter = imagePaths.length;
     setState(() {
       _imagesCounter = imagePaths.length;
     });
 
+    // build the GridView
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
@@ -72,7 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text(
               widget.title,
               style: const TextStyle(
-                color: Colors.white,
+                color: indigo100,
                 fontSize: 24, // cncrease font size
                 fontWeight: FontWeight.bold, // set text to bold
               ),
