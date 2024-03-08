@@ -12,7 +12,7 @@
 
 import 'package:flutter/material.dart';
 
-// Define a custom constant color for indigo[100]
+// define a custom constant color for indigo[100]
 const Color indigo100 = Color(0xFFC5CAE9);
 
 class MyHomePage extends StatefulWidget {
@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    // Initialize _imagesCounter to the actual number of images
+    // initialize _imagesCounter to the actual number of images
     _imagesCounter = imagePaths.length;
   }
 
@@ -97,14 +97,14 @@ class _MyHomePageState extends State<MyHomePage> {
               widget.title,
               style: const TextStyle(
                 color: indigo100,
-                fontSize: 24, // cncrease font size
+                fontSize: 24, // increase font size
                 fontWeight: FontWeight.bold, // set text to bold
               ),
             ),
           ),
           backgroundColor: Colors.black,
-          centerTitle: true, // Center the title vertically
-          titleSpacing: 0, // Set titleSpacing to 0
+          centerTitle: true, // center the title vertically
+          titleSpacing: 0,
         ),
       ),
 
@@ -130,13 +130,15 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20, top: 20),
                     child: Container(
+                      // border
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         border: Border.all(
-                          color: Colors.black, // Set border color
-                          width: 2.0, // Set border width
+                          color: Colors.black,
+                          width: 2.0,
                         ),
                       ),
+                      // enclosed the image in a circle
                       child: ClipOval(
                         child: Image.asset(
                           'assets/avatar.jpg',
@@ -167,16 +169,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             // make "Add Bio" clickable
                             GestureDetector(
                               onTap: () {
-                                print(
-                                    "Add Bio clicked!"); // For debugging purposes
+                                print("Add Bio clicked!"); // for checking
                               },
                               child: const Text(
                                 "Add Bio",
-                                textAlign:
-                                    TextAlign.left, // Align text to the left
+                                textAlign: TextAlign.left,
                                 style: TextStyle(
-                                  color: Colors
-                                      .blue, // Change color to your desired color
+                                  color: Colors.blue,
                                 ),
                               ),
                             ),
@@ -215,11 +214,11 @@ class _MyHomePageState extends State<MyHomePage> {
           Theme(
             data: ThemeData(
               dividerTheme: DividerThemeData(
-                thickness: 1, // Change thickness as desired
-                color: Colors.grey.withOpacity(0.5), // Change opacity
+                thickness: 1,
+                color: Colors.grey.withOpacity(0.5), // change opacity
               ),
             ),
-            child: const Divider(height: 0.1), // Set height as desired
+            child: const Divider(height: 0.1),
           ),
           // ===============================================================================================================
           // ===============================================================================================================
@@ -228,43 +227,43 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: const EdgeInsets.only(top: 20, bottom: 25),
             child: const Row(
               children: [
-                Spacer(), // Add Spacer to evenly distribute
+                Spacer(), // space
                 // POSTS
                 Row(
                   children: [
-                    Icon(Icons.tag), // Your icon
-                    SizedBox(width: 8), // Space between icon and text
-                    Text('POSTS'), // Your text
+                    Icon(Icons.tag),
+                    SizedBox(width: 8), // space
+                    Text('POSTS'),
                   ],
                 ),
-                Spacer(), // Add Spacer to evenly distribute
+                Spacer(), // space
                 // REELS
                 Row(
                   children: [
-                    Icon(Icons.video_file), // Your icon
-                    SizedBox(width: 8), // Space between icon and text
-                    Text('REELS'), // Your text
+                    Icon(Icons.video_file),
+                    SizedBox(width: 8), // space
+                    Text('REELS'),
                   ],
                 ),
-                Spacer(), // Add Spacer to evenly distribute
+                Spacer(), // space
                 // SAVED
                 Row(
                   children: [
-                    Icon(Icons.bookmark), // Your icon
-                    SizedBox(width: 8), // Space between icon and text
-                    Text('SAVED'), // Your text
+                    Icon(Icons.bookmark),
+                    SizedBox(width: 8), // space
+                    Text('SAVED'),
                   ],
                 ),
-                Spacer(), // Add Spacer to evenly distribute
+                Spacer(), // space
                 // TAGGED
                 Row(
                   children: [
-                    Icon(Icons.tag_faces_rounded), // Your icon
-                    SizedBox(width: 8), // Space between icon and text
-                    Text('TAGGED'), // Your text
+                    Icon(Icons.tag_faces_rounded),
+                    SizedBox(width: 8), // space
+                    Text('TAGGED'),
                   ],
                 ),
-                Spacer(), // Add Spacer to evenly distribute
+                Spacer(), // space
               ],
             ),
           ),
@@ -282,10 +281,9 @@ class _MyHomePageState extends State<MyHomePage> {
                   // Handle button press
                   print("Add button clicked!");
                 },
-                tooltip: 'Add', // Tooltip for the button
+                tooltip: 'Add', // tooltip
                 backgroundColor: Colors.black,
-                child: const Icon(Icons.add,
-                    color: Colors.white), // Icon for the button
+                child: const Icon(Icons.add, color: Colors.white),
               ),
             ),
           ),
