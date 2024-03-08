@@ -1,3 +1,15 @@
+/*
+  Name: Gabinete, Keith Ginoel S.
+  Student No.: 2020-03670
+  Lab Section: CMSC 23 - UV 5L
+
+  Laboratory Exercise #02 : OOP in Dart
+  Date created: March 08, 2024
+
+  Program Description:
+    This is a straightforward Flutter application that aims to emulate the UI design of an Instagram profile, albeit in a simplified manner.
+ */
+
 import 'package:flutter/material.dart';
 
 // Define a custom constant color for indigo[100]
@@ -144,22 +156,28 @@ class _MyHomePageState extends State<MyHomePage> {
                     padding: const EdgeInsets.only(top: 20, left: 10),
                     child: Column(
                       children: [
-                        const Row(
+                        Row(
                           children: [
-                            Text(
+                            const Text(
                               "Keith Ginoel\nGabinete",
-                              textAlign:
-                                  TextAlign.left, // Align text to the left
+                              textAlign: TextAlign.left,
                             ),
-                            SizedBox(
-                                width: 30), // Add spacing between the texts
-                            Text(
-                              "Add Bio",
-                              textAlign:
-                                  TextAlign.left, // Align text to the left
-                              style: TextStyle(
-                                color: Colors
-                                    .blue, // Change color to your desired color
+                            const SizedBox(
+                                width: 30), // add spacing between the texts
+                            // make "Add Bio" clickable
+                            GestureDetector(
+                              onTap: () {
+                                print(
+                                    "Add Bio clicked!"); // For debugging purposes
+                              },
+                              child: const Text(
+                                "Add Bio",
+                                textAlign:
+                                    TextAlign.left, // Align text to the left
+                                style: TextStyle(
+                                  color: Colors
+                                      .blue, // Change color to your desired color
+                                ),
                               ),
                             ),
                           ],
@@ -262,6 +280,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 shape: const CircleBorder(),
                 onPressed: () {
                   // Handle button press
+                  print("Add button clicked!");
                 },
                 tooltip: 'Add', // Tooltip for the button
                 backgroundColor: Colors.black,
