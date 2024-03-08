@@ -9,6 +9,5 @@
 **Section:** UV-5L
 
 ## Program Description
-
-    This is a straightforward Flutter application that aims to emulate the UI design of an Instagram profile, albeit in a simplified manner.
+This is a straightforward Flutter application that aims to emulate the UI design of an Instagram profile, albeit in a simplified manner.
 
