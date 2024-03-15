@@ -19,6 +19,7 @@ void main() {
 
 const Color darkBlue = Color(0xFF2C2C3D);
 const Color darkerBlue = Color(0xFF0B0B1A);
+const Color customPurple = Color(0xFF644E9D);
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -28,6 +29,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Exercise 4',
+      theme: ThemeData(
+        inputDecorationTheme: InputDecorationTheme(
+          floatingLabelStyle: TextStyle(color: customPurple),
+          labelStyle: TextStyle(color: Colors.grey),
+        ),
+      ),
       home: Scaffold(
         appBar: AppBar(
           title: Text("Exercise 4",
