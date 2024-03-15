@@ -1,4 +1,4 @@
-# gabinete_exer3
+# gabinete_exer4
 
 **Developed by:** Gabinete, Keith Ginoel S.  
 **Date Developed:** March 15, 2024  
@@ -8,6 +8,6 @@
 **Student Number:** 2020-03670  
 **Section:** UV-5L
 
-## Program Description
-This is a straightforward Flutter application that aims to emulate the UI design of an Instagram profile, albeit in a simplified manner.
+## Program Description  
+This is a simple program that emulates a fun Slam Book using various input widgets discussed in Laboratory Week #4, with an emphasis on utilizing the Form widget and form validation methods.
 

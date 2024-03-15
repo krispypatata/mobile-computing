@@ -7,7 +7,8 @@
   Date created: March 15, 2024
 
   Program Description:
-    This is a straightforward Flutter application that aims to emulate the UI design of an Instagram profile, albeit in a simplified manner.
+      This is a simple program that emulates a fun Slam Book using various input widgets discussed in Laboratory Week #4, 
+    with an emphasis on utilizing the Form widget and form validation methods.
  */
 
 import 'package:flutter/material.dart';
