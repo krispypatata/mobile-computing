@@ -1,23 +1,28 @@
 import 'package:flutter/material.dart';
 
 class SecondRoute extends StatelessWidget {
-  const SecondRoute({super.key});
+  static const routename = '/second2';
+  final String? title;
+  final String? message;
+
+  const SecondRoute({super.key, this.title, this.message});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Route'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped.
-            Navigator.pop(context);
-          },
-          child: const Text('Go back!'),
-        ),
-      ),
-    );
+        appBar: AppBar(title: Text(title!)),
+        body: Center(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+              Text(message!),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context, "Go back");
+                },
+                child: const Text('Go back!'),
+              ),
+            ])));
   }
 }
