@@ -59,6 +59,9 @@ class _FirstRouteState extends State<FirstRoute> {
                 // Update the state of the app.
                 // ...copy paste here the navigator.push method here
                 //you may navigate to SecondScreen
+                Navigator.pushNamed(context, SecondRoute.routename,
+                    arguments: ScreenArguments(
+                        title: "This is a title", message: _controller.text));
               },
             ),
             ListTile(
