@@ -27,36 +27,34 @@ class Checkout extends StatelessWidget {
           Visibility(
             visible: hasItems,
             child: Flexible(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Divider(
-                      height: 4,
-                      thickness: 0.5,
-                      // color: Colors.black,
-                    ),
-                    // TOTAL COST
-                    computeCost(),
-                    // RESET BUTTON
-                    ElevatedButton(
-                      onPressed: () {
-                        context.read<ShoppingCart>().removeAll();
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Payment Successful!"),
-                            duration: Duration(seconds: 1, milliseconds: 100),
-                          ),
-                        );
-                        Navigator.popUntil(
-                          context,
-                          ModalRoute.withName('/products'),
-                        );
-                      },
-                      child: const Text("Pay Now!"),
-                    ),
-                  ],
-                ),
+              child: Column(
+                // mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Divider(
+                    height: 4,
+                    thickness: 0.5,
+                    // color: Colors.black,
+                  ),
+                  // TOTAL COST
+                  computeCost(),
+                  // RESET BUTTON
+                  ElevatedButton(
+                    onPressed: () {
+                      context.read<ShoppingCart>().removeAll();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Payment Successful!"),
+                          duration: Duration(seconds: 1, milliseconds: 100),
+                        ),
+                      );
+                      Navigator.popUntil(
+                        context,
+                        ModalRoute.withName('/products'),
+                      );
+                    },
+                    child: const Text("Pay Now!"),
+                  ),
+                ],
               ),
             ),
           ),
@@ -82,7 +80,12 @@ class Checkout extends StatelessWidget {
                     ) {
                       return ListTile(
                         title: Text(products[index].name),
-                        trailing: Text(products[index].price.toString()),
+                        trailing: Text(
+                          products[index].price.toString(),
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
                       );
                     },
                   ),
