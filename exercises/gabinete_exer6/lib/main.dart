@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:state_management/screen/MyCart.dart';
-import 'package:state_management/screen/MyCatalog.dart';
+import 'package:gabinete_exer6/screen/Checkout.dart';
+import 'package:gabinete_exer6/screen/MyCart.dart';
+import 'package:gabinete_exer6/screen/MyCatalog.dart';
 import 'package:provider/provider.dart';
 import 'provider/shoppingcart_provider.dart';
 
@@ -22,12 +23,13 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         // colorScheme: ThemeData().colorScheme.copyWith(background: Colors.black),
       ),
-      initialRoute: "/",
+      initialRoute: "/products",
       routes: {
         "/cart": (context) => const MyCart(),
+        "/checkout": (context) => const Checkout(),
         "/products": (context) => const MyCatalog(),
       },
-      home: const MyCatalog(),
+      // home: const MyCatalog(),
     );
   }
 }

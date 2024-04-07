@@ -9,28 +9,46 @@ class MyCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("My Cart")),
+      appBar: AppBar(
+        title: const Text("My Cart"),
+        // automaticallyImplyLeading: false, // hide the back button
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           getItems(context),
           computeCost(),
-          const Divider(height: 4, color: Colors.black),
+          const Divider(
+            height: 4,
+            thickness: 0.5,
+            // color: Colors.black,
+          ),
           Flexible(
-              child: Center(
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                ElevatedButton(
-                    onPressed: () {
-                      context.read<ShoppingCart>().removeAll();
-                    },
-                    child: const Text("Reset")),
-              ]))),
+            child: Center(
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // RESET BUTTON
+                    ElevatedButton(
+                      onPressed: () {
+                        context.read<ShoppingCart>().removeAll();
+                      },
+                      child: const Text("Reset"),
+                    ),
+                    // CHECKOUT BUTTON
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, "/checkout");
+                      },
+                      child: const Text("Checkout"),
+                    ),
+                  ]),
+            ),
+          ),
           TextButton(
             child: const Text("Go back to Product Catalog"),
             onPressed: () {
-              Navigator.pushNamed(context, "/products");
+              Navigator.pop(context);
             },
           ),
         ],
@@ -71,11 +89,13 @@ class MyCart extends StatelessWidget {
                               ),
                             );
                           } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("Cart Empty!"),
-                              duration: Duration(seconds: 1, milliseconds: 100),
-                            ));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Cart Empty!"),
+                                duration:
+                                    Duration(seconds: 1, milliseconds: 100),
+                              ),
+                            );
                           }
                         },
                       ),
