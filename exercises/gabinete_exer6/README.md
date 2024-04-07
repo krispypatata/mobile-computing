@@ -9,6 +9,7 @@
 **Section:** UV-5L
 
 ## Program Description  
+<div align="justify">
 This program is a simple e-commerce application that allows users to 
 add item products to a shopping cart, and proceed to checkout. It starts 
 with a catalog page, where users can add items to their shopping cart from 
@@ -17,3 +18,4 @@ can navigate to the cart page to review selections and proceed to checkout.
 At checkout page, users can review the total cost and confirm their purchase. 
 Additionally, the application utilizes the Provider package for effective 
 state management.
+</div>
