@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'gabinete_exer6',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         // colorScheme: ThemeData().colorScheme.copyWith(background: Colors.black),
