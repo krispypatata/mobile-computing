@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: FlutterContactsExample(),
     );
   }
@@ -56,7 +57,8 @@ class _FlutterContactsExampleState extends State<FlutterContactsExample> {
             context,
             MaterialPageRoute(
                 builder: (context) => FormPage()), // Navigate to the form page
-          );
+          ).then((_) =>
+              _fetchContacts()); // Refresh contacts after form page is popped;
         },
         child: const Icon(Icons.add),
       ),
@@ -79,14 +81,19 @@ class _FlutterContactsExampleState extends State<FlutterContactsExample> {
                   await FlutterContacts.getContact(_contacts![i].id);
               if (context.mounted) {
                 Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (_) => ContactPage(fullContact!)));
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ContactPage(fullContact!),
+                  ),
+                ).then((_) =>
+                    _fetchContacts()); // Refresh contacts after form page is popped;
               }
             }));
   }
 }
 
+// Page for viewing contact info
+// delete info is also implemented here
 class ContactPage extends StatelessWidget {
   final Contact contact;
   const ContactPage(this.contact, {super.key});
@@ -125,6 +132,11 @@ class ContactPage extends StatelessWidget {
                     // Implement delete functionality here
                     await contact.delete();
                     Navigator.pop(context); // Navigate back after deletion
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => FlutterContactsExample()),
+                    // );
                   },
                   child: Text('Delete'),
                 ),
@@ -135,20 +147,7 @@ class ContactPage extends StatelessWidget {
       );
 }
 
-// class FormPage extends StatelessWidget {
-//   const FormPage({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Form Page')),
-//       body: Center(
-//         child: Text('This is the form page'),
-//       ),
-//     );
-//   }
-// }
-
+// Page for adding a contact
 class FormPage extends StatefulWidget {
   const FormPage({Key? key}) : super(key: key);
 
@@ -218,7 +217,7 @@ class _FormPageState extends State<FormPage> {
                 decoration: InputDecoration(labelText: 'Email Address'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter email address';
+                    return 'Please enter email address (optional)';
                   }
                   return null;
                 },
@@ -238,7 +237,13 @@ class _FormPageState extends State<FormPage> {
                       await newContact.insert();
 
                       // Navigate back to the previous screen
+                      // _fetchContacts();
                       Navigator.pop(context);
+                      // Navigator.pushReplacement(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => FlutterContactsExample()),
+                      // );
                     }
                   },
                   child: Text('Save'),

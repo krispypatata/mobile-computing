@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: FlutterContactsExample(),
     );
   }
@@ -48,7 +49,10 @@ class _FlutterContactsExampleState extends State<FlutterContactsExample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('My Own Contacts Book')),
+      appBar: AppBar(
+        title: const Text('My Own Contacts Book'),
+        automaticallyImplyLeading: false, // hide the back button
+      ),
       body: _body(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -87,6 +91,8 @@ class _FlutterContactsExampleState extends State<FlutterContactsExample> {
   }
 }
 
+// Page for viewing contact info
+// delete info is also implemented here
 class ContactPage extends StatelessWidget {
   final Contact contact;
   const ContactPage(this.contact, {super.key});
@@ -121,8 +127,10 @@ class ContactPage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     // Implement delete functionality here
+                    await contact.delete();
+                    Navigator.pop(context); // Navigate back after deletion
                   },
                   child: Text('Delete'),
                 ),
@@ -133,20 +141,7 @@ class ContactPage extends StatelessWidget {
       );
 }
 
-// class FormPage extends StatelessWidget {
-//   const FormPage({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Form Page')),
-//       body: Center(
-//         child: Text('This is the form page'),
-//       ),
-//     );
-//   }
-// }
-
+// Page for adding a contact
 class FormPage extends StatefulWidget {
   const FormPage({Key? key}) : super(key: key);
 
@@ -216,7 +211,7 @@ class _FormPageState extends State<FormPage> {
                 decoration: InputDecoration(labelText: 'Email Address'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter email address';
+                    return 'Please enter email address (optional)';
                   }
                   return null;
                 },
@@ -224,23 +219,19 @@ class _FormPageState extends State<FormPage> {
               SizedBox(height: 20),
               Center(
                 child: ElevatedButton(
-                  onPressed: () {
+                  onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      // Form is valid, save the contact
-                      String firstName = _firstNameController.text;
-                      String lastName = _lastNameController.text;
-                      String phoneNumber = _phoneNumberController.text;
-                      String emailAddress = _emailAddressController.text;
+                      // Form is valid, proceed to save the contact
 
-                      // Implement save functionality here
+                      // Insert new contact
+                      final newContact = Contact()
+                        ..name.first = _firstNameController.text
+                        ..name.last = _lastNameController.text
+                        ..phones = [Phone(_phoneNumberController.text)];
+                      await newContact.insert();
 
-                      // Clear text fields after saving
-                      _firstNameController.clear();
-                      _lastNameController.clear();
-                      _phoneNumberController.clear();
-                      _emailAddressController.clear();
-
-                      // Show a confirmation dialog or navigate to another page
+                      // Navigate back to the previous screen
+                      Navigator.pop(context);
                     }
                   },
                   child: Text('Save'),
