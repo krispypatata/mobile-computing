@@ -1,3 +1,26 @@
+/*
+  Name: Gabinete, Keith Ginoel S.
+  Student No.: 2020-03670
+  Lab Section: CMSC 23 - UV 5L
+
+  Laboratory Exercise #07: Android Features and Utilities
+  Date created: April 15, 2024
+
+  Program Description:
+      This program is a simple contacts book application built using Flutter. 
+      The application utilizes the flutter_contacts package to access and manage 
+      device contacts. Users can view a list of their existing contacts on the 
+      homepage screen and tap on a contact to view its details. On this contact 
+      details page, users can tap on a "Delete" button to remove the currently 
+      viewed contact. Furthermore, users also have the ability to add a new 
+      contact by tapping on an "Add" button at the bottom right corner of the 
+      homepage screen. The "Add" button navigates the user to a form page where 
+      they can enter the details of the new contact, such as first name, last 
+      name, phone number, and email address. After filling out the form, users 
+      can tap on the "Save" button to add the new contact. The contacts list on 
+      the homepage screen is refreshed after adding a new contact or deleting an 
+      existing one.
+ */
 import 'package:flutter/material.dart';
 import 'package:flutter_contacts/flutter_contacts.dart';
 
@@ -53,12 +76,12 @@ class _FlutterContactsExampleState extends State<FlutterContactsExample> {
       body: _body(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          // navigate to the form page (page for saving/adding a contact)
           Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => FormPage()), // Navigate to the form page
+            MaterialPageRoute(builder: (context) => FormPage()),
           ).then((_) =>
-              _fetchContacts()); // Refresh contacts after form page is popped;
+              _fetchContacts()); // refresh contacts list after FormPage is popped;
         },
         child: const Icon(Icons.add),
       ),
@@ -80,13 +103,14 @@ class _FlutterContactsExampleState extends State<FlutterContactsExample> {
               final fullContact =
                   await FlutterContacts.getContact(_contacts![i].id);
               if (context.mounted) {
+                // navigate to the contact page (page for viewing or deleting a contact)
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) => ContactPage(fullContact!),
                   ),
                 ).then((_) =>
-                    _fetchContacts()); // Refresh contacts after form page is popped;
+                    _fetchContacts()); // refresh contacts list after ContactPage is popped (after deleting a contact);
               }
             }));
   }
@@ -103,46 +127,48 @@ class ContactPage extends StatelessWidget {
         appBar: AppBar(title: Text(contact.displayName)),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
-          child:
-              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('First name: ${contact.name.first}'),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text('Last name: ${contact.name.last}'),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                  'Phone number: ${contact.phones.isNotEmpty ? contact.phones.first.number : '(none)'}'),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                  'Email address: ${contact.emails.isNotEmpty ? contact.emails.first.address : '(none)'}'),
-            ),
-            Center(
-              // Center the button horizontally
-              child: Padding(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    // Implement delete functionality here
-                    await contact.delete();
-                    Navigator.pop(context); // Navigate back after deletion
-                    // Navigator.pushReplacement(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => FlutterContactsExample()),
-                    // );
-                  },
-                  child: Text('Delete'),
+                child: Text('First name: ${contact.name.first}'),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Last name: ${contact.name.last}'),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                    'Phone number: ${contact.phones.isNotEmpty ? contact.phones.first.number : '(none)'}'),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                    'Email address: ${contact.emails.isNotEmpty ? contact.emails.first.address : '(none)'}'),
+              ),
+
+              // button for deleting a contact
+              // center the button horizontally
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      // delete a contact
+                      // ref: https://pub.dev/packages/flutter_contacts
+                      await contact.delete();
+
+                      // Navigate back to homepage after deletion
+                      Navigator.pop(context);
+                    },
+                    child: Text('Delete'),
+                  ),
                 ),
               ),
-            ),
-          ]),
+            ],
+          ),
         ),
       );
 }
@@ -223,27 +249,24 @@ class _FormPageState extends State<FormPage> {
                 },
               ),
               SizedBox(height: 20),
+
+              // button for saving a new contact
+              // center the button horizontally
               Center(
                 child: ElevatedButton(
                   onPressed: () async {
+                    // form is valid—can proceed to saving the contact info entered
                     if (_formKey.currentState!.validate()) {
-                      // Form is valid, proceed to save the contact
-
-                      // Insert new contact
+                      // save/add/insert a new contact
+                      // ref: https://pub.dev/packages/flutter_contacts
                       final newContact = Contact()
                         ..name.first = _firstNameController.text
                         ..name.last = _lastNameController.text
                         ..phones = [Phone(_phoneNumberController.text)];
                       await newContact.insert();
 
-                      // Navigate back to the previous screen
-                      // _fetchContacts();
+                      // Navigate back to homepage after deletion
                       Navigator.pop(context);
-                      // Navigator.pushReplacement(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => FlutterContactsExample()),
-                      // );
                     }
                   },
                   child: Text('Save'),
