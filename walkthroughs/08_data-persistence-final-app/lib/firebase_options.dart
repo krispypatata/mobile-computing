@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -44,40 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyDLENGJZCcqwmjftfOtFwt-qcVCn9YXalI',
-    appId: '1:7904411564:web:7d02793c82d57a2141c409',
-    messagingSenderId: '7904411564',
-    projectId: 'cmsc-23-demo',
-    authDomain: 'cmsc-23-demo.firebaseapp.com',
-    storageBucket: 'cmsc-23-demo.appspot.com',
-    measurementId: 'G-58QXJLM7YK',
+    apiKey: 'AIzaSyBvDGRX1zFNq1lPXMM7jpKZENx3MNAiFco',
+    appId: '1:975888757669:web:4b54196cfbc83a9732ee4c',
+    messagingSenderId: '975888757669',
+    projectId: 'cmsc23-todo-app-ksgabinete',
+    authDomain: 'cmsc23-todo-app-ksgabinete.firebaseapp.com',
+    storageBucket: 'cmsc23-todo-app-ksgabinete.appspot.com',
+    measurementId: 'G-J5GSZWVRFE',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBw_YvNyqTlqZt6SxkKmNCvbu7X5IVnhRI',
-    appId: '1:7904411564:android:9a28807677cd179c41c409',
-    messagingSenderId: '7904411564',
-    projectId: 'cmsc-23-demo',
-    storageBucket: 'cmsc-23-demo.appspot.com',
+    apiKey: 'AIzaSyAZ5zPw2LIzIHTjOT7GUOOZhz010j4AEUI',
+    appId: '1:975888757669:android:d7ce8e223aee43e532ee4c',
+    messagingSenderId: '975888757669',
+    projectId: 'cmsc23-todo-app-ksgabinete',
+    storageBucket: 'cmsc23-todo-app-ksgabinete.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyClY1bAU87mBYGDZChVICDbFbcqenEzpsQ',
-    appId: '1:7904411564:ios:eb26143890aff1ec41c409',
-    messagingSenderId: '7904411564',
-    projectId: 'cmsc-23-demo',
-    storageBucket: 'cmsc-23-demo.appspot.com',
-    iosClientId: '7904411564-jvner65n3ftdd71vctodhr54rkbmp5va.apps.googleusercontent.com',
+    apiKey: 'AIzaSyANfoUbcxBRRJJz7whLzb_vC6P_rOKIZHA',
+    appId: '1:975888757669:ios:825360774d36294232ee4c',
+    messagingSenderId: '975888757669',
+    projectId: 'cmsc23-todo-app-ksgabinete',
+    storageBucket: 'cmsc23-todo-app-ksgabinete.appspot.com',
     iosBundleId: 'com.example.week7NetworkingDiscussion',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyClY1bAU87mBYGDZChVICDbFbcqenEzpsQ',
-    appId: '1:7904411564:ios:eb26143890aff1ec41c409',
-    messagingSenderId: '7904411564',
-    projectId: 'cmsc-23-demo',
-    storageBucket: 'cmsc-23-demo.appspot.com',
-    iosClientId: '7904411564-jvner65n3ftdd71vctodhr54rkbmp5va.apps.googleusercontent.com',
+    apiKey: 'AIzaSyANfoUbcxBRRJJz7whLzb_vC6P_rOKIZHA',
+    appId: '1:975888757669:ios:825360774d36294232ee4c',
+    messagingSenderId: '975888757669',
+    projectId: 'cmsc23-todo-app-ksgabinete',
+    storageBucket: 'cmsc23-todo-app-ksgabinete.appspot.com',
     iosBundleId: 'com.example.week7NetworkingDiscussion',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBvDGRX1zFNq1lPXMM7jpKZENx3MNAiFco',
+    appId: '1:975888757669:web:3d7b1e30126c0bb032ee4c',
+    messagingSenderId: '975888757669',
+    projectId: 'cmsc23-todo-app-ksgabinete',
+    authDomain: 'cmsc23-todo-app-ksgabinete.firebaseapp.com',
+    storageBucket: 'cmsc23-todo-app-ksgabinete.appspot.com',
+    measurementId: 'G-11ZDVV3MCH',
+  );
+
 }
