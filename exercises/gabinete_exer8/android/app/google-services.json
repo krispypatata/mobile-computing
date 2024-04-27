@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "428200017826",
+    "project_id": "cmsc23-ksgabinete",
+    "storage_bucket": "cmsc23-ksgabinete.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428200017826:android:ead446a2f1077093893cfb",
+        "android_client_info": {
+          "package_name": "com.example.gabinete_exer8"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJtnCJqJwqalAQ6FDCe_O2DCTIEIn09oU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

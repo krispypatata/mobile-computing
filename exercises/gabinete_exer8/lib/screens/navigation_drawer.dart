@@ -30,7 +30,9 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                Navigator.pushNamed(context, '/friends');
+                Navigator.popUntil(context, ModalRoute.withName('/friends'));
+                // Navigator.pushNamed(context, '/friends');
+                // Navigator.pop(context);
               },
             ),
           ],

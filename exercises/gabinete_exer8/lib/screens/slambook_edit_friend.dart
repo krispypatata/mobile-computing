@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import '../configs/constants.dart';
 import '../models/friend_info.dart';
-import 'info_page.dart';
-import 'navigation_drawer.dart';
 import 'package:provider/provider.dart';
 import '../providers/friend_provider.dart';
 
-class Slambook extends StatefulWidget {
-  static const routeName = '/slambook';
+class SlambookUpdate extends StatefulWidget {
+  static const routeName = '/editfriend';
 
-  const Slambook({super.key});
+  const SlambookUpdate({super.key});
 
   @override
   _SlambookState createState() => _SlambookState();
 }
 
-class _SlambookState extends State<Slambook> {
+class _SlambookState extends State<SlambookUpdate> {
   final _formKey = GlobalKey<FormState>();
 
   // super power options
@@ -45,7 +43,6 @@ class _SlambookState extends State<Slambook> {
 
   // for form validation
   Map<String, dynamic> formValues = {
-    'nameOnChanged': "",
     'nicknameOnChanged': "",
     'ageOnChanged': "",
     'isSwitchOn': false,
@@ -55,14 +52,12 @@ class _SlambookState extends State<Slambook> {
   };
 
   // text editing controllers (for resetting textfield values in the UI)
-  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _nicknameController = TextEditingController();
   final TextEditingController _ageController = TextEditingController();
 
   // dispose text editing controllers to avoid memory leaks
   @override
   void dispose() {
-    _nameController.dispose();
     _nicknameController.dispose();
     _ageController.dispose();
     super.dispose();
@@ -73,7 +68,6 @@ class _SlambookState extends State<Slambook> {
 
   // for summary section (so that the current form values will only be displayed when the done button is clicked and not every time the state of the app changes)
   Map<String, dynamic> doneValues = {
-    'nameOnChanged': "",
     'nicknameOnChanged': "",
     'ageOnChanged': "",
     'isSwitchOn': false,
@@ -89,7 +83,6 @@ class _SlambookState extends State<Slambook> {
     });
 
     doneValues = {
-      'nameOnChanged': formValues['nameOnChanged'],
       'nicknameOnChanged': formValues['nicknameOnChanged'],
       'ageOnChanged': formValues['ageOnChanged'],
       'isSwitchOn': formValues['isSwitchOn'],
@@ -99,71 +92,36 @@ class _SlambookState extends State<Slambook> {
     };
   }
 
-  // Method to create a FriendInfo object based on doneValues
-  FriendInfo createFriendInfo() {
-    return FriendInfo(
-      name: doneValues["nameOnChanged"],
-      nickname: doneValues["nicknameOnChanged"],
-      age: doneValues["ageOnChanged"],
-      isInRelationship: doneValues["isSwitchOn"],
-      happinessLevel: doneValues["sliderValue"],
-      superpower: doneValues["dropdownValue"],
-      motto: doneValues["radioValue"],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    // list of FriendInfo objects, retrieved from the provider
-    // List<FriendInfo> friendsList =
-    //     context.watch<FriendListProvider>().friendsList;
-
+    final friendInfo = ModalRoute.of(context)!.settings.arguments as FriendInfo;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Slambook",
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            )),
-        backgroundColor: darkerBlue,
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu, color: Colors.white),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
-        ),
-        // centerTitle: true, // center title vertically
-      ),
-      drawer: AppDrawer(),
       floatingActionButton: FloatingActionButton.extended(
         // shape: const CircleBorder(),
         onPressed: () {
           // handle button press
           // verify if there's a valid friend info
-          if (doneValues["nameOnChanged"] != "") {
-            // get the list of friends from the provider
+          if (_isSummaryVisible) {
+            // update the friend's info in the database
+            print(friendInfo.id);
+            print(
+                "fdsafsafsafsafasfdsafasfsafsdafafasfasfasdfsafasfsafdsafsfasdfsdafsadfasfssdfasffsaf");
+            context.read<FriendListProvider>().editFriend(
+                friendInfo.id!,
+                doneValues["nicknameOnChanged"],
+                doneValues["ageOnChanged"],
+                doneValues["isSwitchOn"],
+                doneValues["sliderValue"],
+                doneValues["dropdownValue"],
+                doneValues["radioValue"]);
 
-            // creating a new FriendInfo object
-            FriendInfo friendInfo = createFriendInfo();
-
-            // add friend to the provider
-            context.read<FriendListProvider>().addFriend(friendInfo);
-
-            // change page
-            Navigator.pushNamed(
-              context,
-              InfoPage.routeName,
-              arguments: friendInfo,
-            );
+            // go back to the friends' page
+            Navigator.pop(context);
 
             // inform the user that a friend has been added
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
-                content: Text('Successfully added a friend!'),
+                content: Text('Successfully updated friend\'s info!'),
                 backgroundColor: Colors.green,
                 duration: Duration(milliseconds: 1000),
               ),
@@ -179,11 +137,11 @@ class _SlambookState extends State<Slambook> {
             );
           }
         },
-        tooltip: 'Add a friend to the database.', // tooltip
+        tooltip: 'Update friend\'s info in the database.', // tooltip
         backgroundColor: floatingButtonColor,
         // child: const Icon(Icons.person, color: Colors.black),
         icon: const Icon(Icons.person, color: Colors.black),
-        label: const Text("Add"),
+        label: const Text("Update"),
       ),
       body: Container(
         color: darkBlue,
@@ -211,31 +169,7 @@ class _SlambookState extends State<Slambook> {
                       ),
                     ),
                   ),
-                  // 2nd child: Textfield (Name)
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: TextFormField(
-                      controller: _nameController,
-                      style: const TextStyle(color: Colors.white),
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        hintText: "Name",
-                        labelText: "Name",
-                        hintStyle: TextStyle(color: Colors.grey),
-                        labelStyle: TextStyle(color: Colors.grey),
-                      ),
-                      onChanged: (String value) {
-                        formValues["nameOnChanged"] = value;
-                        // print(formValues["onChanged"]);
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter some text';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
+
                   // 3rd child: Textfield (Nickname)
                   Padding(
                     padding: const EdgeInsets.all(10),
@@ -484,33 +418,60 @@ class _SlambookState extends State<Slambook> {
                       }).toList(),
                     ),
                   ),
-                  // 12th child: ElevatedButton (Done)
-                  ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        _formKey.currentState?.save();
-                        updateSummary();
-                      } else {
-                        // If the form is not filled properly, show a Snackbar
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please fill out the form properly.'),
-                            backgroundColor: Colors.red,
-                            duration: Duration(milliseconds: 1000),
+                  // 12th child: ElevatedButton (Done & Cancel)
+                  Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        // Done
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState?.save();
+                              updateSummary();
+                            } else {
+                              // If the form is not filled properly, show a Snackbar
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                      'Please fill out the form properly.'),
+                                  backgroundColor: Colors.red,
+                                  duration: Duration(milliseconds: 1000),
+                                ),
+                              );
+                            }
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: customPurple,
                           ),
-                        );
-                      }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: customPurple,
-                    ),
-                    child: const Text(
-                      'Done',
-                      style: TextStyle(
-                        color: Colors.black,
-                      ),
+                          child: const Text(
+                            'Done',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                        // add some spacing between the two
+                        SizedBox(width: 20),
+                        // Cancel
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: customPurple,
+                          ),
+                          child: const Text(
+                            'Cancel',
+                            style: TextStyle(
+                              color: Colors.black,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
+
                   // 13th child: Divider
                   Padding(
                     padding: const EdgeInsets.only(
@@ -566,7 +527,7 @@ class _SlambookState extends State<Slambook> {
                                 ),
                                 Expanded(
                                   child: Text(
-                                    "${doneValues["nameOnChanged"]}",
+                                    "${friendInfo.name}",
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontStyle: FontStyle.italic,
@@ -773,7 +734,6 @@ class _SlambookState extends State<Slambook> {
                           }
 
                           // reset textfield contents in the UI
-                          _nameController.text = "";
                           _nicknameController.text = "";
                           _ageController.text = "";
 

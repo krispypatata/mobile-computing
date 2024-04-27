@@ -174,7 +174,7 @@ class DisplaySummary extends StatelessWidget {
                 ),
                 Expanded(
                   child: Text(
-                    friendInfo.age,
+                    friendInfo.age.toString(),
                     style: const TextStyle(
                       color: rightTextColor,
                       fontStyle: FontStyle.italic,

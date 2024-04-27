@@ -3,15 +3,17 @@ import 'dart:convert';
 
 // class that will contain friend's info
 class FriendInfo {
-  final String name;
-  final String nickname;
-  final String age;
-  final bool isInRelationship;
-  final double happinessLevel;
-  final String superpower;
-  final String motto;
+  String? id;
+  String name;
+  String nickname;
+  int age;
+  bool isInRelationship;
+  double happinessLevel;
+  String superpower;
+  String motto;
 
-  const FriendInfo({
+  FriendInfo({
+    this.id,
     required this.name,
     required this.nickname,
     required this.age,
@@ -24,6 +26,7 @@ class FriendInfo {
   // Factory constructor to instantiate object from json format
   factory FriendInfo.fromJson(Map<String, dynamic> json) {
     return FriendInfo(
+      id: json['id'],
       name: json['name'],
       nickname: json['nickname'],
       age: json['age'],
