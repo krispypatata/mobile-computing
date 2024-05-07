@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../screens/signup.dart';
 import '../providers/user_provider.dart';
+import '../utils/globals.dart' as globals;
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -104,6 +105,7 @@ class _LoginPageState extends State<LoginPage> {
             passwordError = null;
           });
           if (_formKey.currentState!.validate()) {
+            globals.currentLoggedInUserEmail = emailController.text.trim();
             String? error = await context.read<AuthProvider>().signIn(
                   emailController.text.trim(),
                   passwordController.text.trim(),
@@ -119,20 +121,20 @@ class _LoginPageState extends State<LoginPage> {
                   passwordError = error;
                 });
               }
-            } else {
-              // update the selected user on user provider
-              context
-                  .read<UserProvider>()
-                  .changeUserByEmail(emailController.text.trim());
-              // change selectedUserEmail
-              // await context
-              //     .read<UserProvider>()
-              //     .changeSelectedUserEmail(emailController.text.trim());
-
-              // check the selected user email
-              // print(
-              //     "Selected user email: ${context.read<UserProvider>().selectedUserEmail}");
             }
+            context
+                .read<UserProvider>()
+                .changeSelectedUserEmail(emailController.text.trim());
+
+            // print(
+            //     "SelecteEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEeEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEed user email: ${context.read<UserProvider>().selectedUserEmail}");
+            // update the selected user on user provider
+            // context
+            //     .read<UserProvider>()
+            //     .changeUserByEmail(emailController.text.trim());
+            // change selectedUserEmail
+
+            // check the selected user email
           }
         },
         style: ButtonStyle(

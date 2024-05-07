@@ -182,6 +182,9 @@ class _SignupPageState extends State<SignupPage> {
                 lastName: lastNameController.text);
             context.read<UserProvider>().addUser(newUser);
 
+            // change selected email
+            // context.read<UserProvider>().changeSelectedUserEmail(newUser.email);
+
             // change the selected user to the new user
             context.read<UserProvider>().changeSelectedUser(newUser);
             // print email of the selected user
