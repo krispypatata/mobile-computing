@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/auth_provider.dart';
 import '../providers/user_provider.dart';
 import '../models/user_model.dart';
+import '../utils/globals.dart' as globals;
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -158,6 +159,7 @@ class _SignupPageState extends State<SignupPage> {
             passwordError = null;
           });
           if (_formKey.currentState!.validate()) {
+            globals.currentLoggedInUserEmail = emailController.text.toString();
             // If the form is valid, proceed with sign up
             String? error = await context
                 .read<AuthProvider>()
