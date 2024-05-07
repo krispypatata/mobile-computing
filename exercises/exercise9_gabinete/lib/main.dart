@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/todo_provider.dart';
 import '../providers/auth_provider.dart';
+import '../providers/user_provider.dart';
 import '../screens/todo_page.dart';
 import '../screens/user_details.dart';
 import '../screens/login.dart';
@@ -19,6 +20,7 @@ void main() async {
       providers: [
         ChangeNotifierProvider(create: ((context) => TodoListProvider())),
         ChangeNotifierProvider(create: ((context) => AuthProvider())),
+        ChangeNotifierProvider(create: ((context) => UserProvider())),
       ],
       child: MyApp(),
     ),
@@ -48,15 +50,45 @@ class MyApp extends StatelessWidget {
 
 final myTheme = ThemeData(
   brightness: Brightness.dark,
-  primarySwatch: Colors.blueGrey, // Change this color if desired
+  primarySwatch: Colors.cyan,
   backgroundColor: Colors.black,
   scaffoldBackgroundColor: Colors.black,
-  cardColor: Colors.grey[850],
+  cardColor: Colors
+      .black, // Change card color to black for better contrast in dark mode
   textTheme: const TextTheme(
     bodyText1: TextStyle(color: Colors.white),
     headline1: TextStyle(
-        fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.white),
+      fontSize: 24.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
     headline2: TextStyle(
-        fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.white),
+      fontSize: 18.0,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
+    ),
+  ),
+  highlightColor: Colors.cyanAccent, // Update the highlight color (cursor)
+  focusColor: Colors.cyanAccent, // Update the focus color (text selection)
+  primaryColorLight: Colors.cyan, // Define primary color light
+  primaryColorDark:
+      Colors.cyan, // Define primary color dark with a suitable shade of cyan
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: Colors.cyan,
+    selectionColor: Colors
+        .transparent, // Set transparent selection color for better readability
+    selectionHandleColor: Colors.cyan,
+  ),
+  appBarTheme: AppBarTheme(
+    backgroundColor:
+        const Color.fromARGB(255, 2, 67, 73), // Set app bar background color
+  ),
+  drawerTheme: DrawerThemeData(
+    backgroundColor:
+        const Color.fromARGB(255, 1, 55, 60), // Set drawer background color
+  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor:
+        Color.fromARGB(255, 5, 120, 130), // Set FAB background color
   ),
 );

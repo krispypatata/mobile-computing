@@ -46,24 +46,33 @@ class _TodoPageState extends State<TodoPage> {
       BuildContext context, Stream<QuerySnapshot<Object?>> todosStream) {
     return Scaffold(
       drawer: Drawer(
-          child: ListView(padding: EdgeInsets.zero, children: [
-        ListTile(
-          title: const Text('Details'),
-          onTap: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const UserDetailsPage()));
-          },
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            Container(
+              height: 75, // Adjust height as needed
+            ),
+            ListTile(
+              title: const Text('Details'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const UserDetailsPage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              title: const Text('Logout'),
+              onTap: () {
+                context.read<AuthProvider>().signOut();
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
-        ListTile(
-          title: const Text('Logout'),
-          onTap: () {
-            context.read<AuthProvider>().signOut();
-            Navigator.pop(context);
-          },
-        ),
-      ])),
+      ),
       appBar: AppBar(
         title: Text("Todo"),
       ),
@@ -158,7 +167,7 @@ class _TodoPageState extends State<TodoPage> {
             ),
           );
         },
-        child: const Icon(Icons.add_outlined),
+        child: const Icon(Icons.add_outlined, color: Colors.black),
       ),
     );
   }
