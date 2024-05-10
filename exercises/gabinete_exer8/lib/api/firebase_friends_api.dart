@@ -37,7 +37,7 @@ class FirebaseFriendAPI {
     String newMotto,
   ) async {
     try {
-      await db.collection("friends").doc(id).update({"nickName": newNickname});
+      await db.collection("friends").doc(id).update({"nickname": newNickname});
       await db.collection("friends").doc(id).update({"age": newAge});
       await db
           .collection("friends")
