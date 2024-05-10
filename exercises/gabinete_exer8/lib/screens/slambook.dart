@@ -158,7 +158,47 @@ class _SlambookState extends State<Slambook> {
               context,
               InfoPage.routeName,
               arguments: friendInfo,
-            );
+            ).then((_) {
+              // Reset the form after a short delay
+              Future.delayed(Duration(milliseconds: 300), () {
+                setState(() {
+                  // Reset form values
+                  formValues = {
+                    'nameOnChanged': "",
+                    'nicknameOnChanged': "",
+                    'ageOnChanged': "",
+                    'isSwitchOn': false,
+                    'sliderValue': 1.0,
+                    'dropdownValue': _dropdownOptions.first,
+                    'radioValue': _motto.keys.first,
+                  };
+
+                  // Reset doneValues
+                  doneValues = {
+                    'nameOnChanged': "",
+                    'nicknameOnChanged': "",
+                    'ageOnChanged': "",
+                    'isSwitchOn': false,
+                    'sliderValue': 1.0,
+                    'dropdownValue': _dropdownOptions.first,
+                    'radioValue': _motto.keys.first,
+                  };
+
+                  // Reset motto options
+                  for (String key in _motto.keys) {
+                    _motto[key] = false;
+                  }
+
+                  // Reset textfield contents in the UI
+                  _nameController.text = "";
+                  _nicknameController.text = "";
+                  _ageController.text = "";
+
+                  // Hide the summary section
+                  _isSummaryVisible = false;
+                });
+              });
+            });
 
             // inform the user that a friend has been added
             ScaffoldMessenger.of(context).showSnackBar(
